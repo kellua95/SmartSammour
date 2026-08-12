@@ -1,0 +1,37 @@
+# =========================
+# .NET
+# =========================
+**/bin/
+**/obj/
+.vs/
+
+# =========================
+# React / Node
+# =========================
+**/node_modules/
+**/dist/
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Local development configuration
+**/appsettings.Development.json
+
+# =========================
+# IDE
+# =========================
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db

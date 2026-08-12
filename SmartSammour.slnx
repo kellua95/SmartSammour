@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SmartSammour.API/SmartSammour.API.csproj" />
+  <Project Path="SmartSammour.Application/SmartSammour.Application.csproj" />
+  <Project Path="SmartSammour.Core/SmartSammour.Core.csproj" />
+  <Project Path="SmartSammour.Infrastructure/SmartSammour.Infrastructure.csproj" />
+</Solution>
