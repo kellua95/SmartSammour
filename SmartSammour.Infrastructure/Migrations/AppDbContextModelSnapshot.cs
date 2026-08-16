@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmartSammour.Infrastructure.data;
 
 #nullable disable
@@ -18,33 +18,32 @@ namespace SmartSammour.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "10.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -53,19 +52,19 @@ namespace SmartSammour.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -78,19 +77,19 @@ namespace SmartSammour.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -102,17 +101,17 @@ namespace SmartSammour.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -124,10 +123,10 @@ namespace SmartSammour.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -139,16 +138,16 @@ namespace SmartSammour.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -159,19 +158,19 @@ namespace SmartSammour.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("ExtraPrice")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("ServiceId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -183,51 +182,289 @@ namespace SmartSammour.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ExtraPrice = 250m,
-                            Name = "E-commerce functionality",
-                            ServiceId = 1
+                            ExtraPrice = 200m,
+                            Name = "Chatting",
+                            ServiceId = 2
                         },
                         new
                         {
                             Id = 2,
-                            ExtraPrice = 30m,
-                            Name = "Extra page (each)",
-                            ServiceId = 1
+                            ExtraPrice = 200m,
+                            Name = "Chatting",
+                            ServiceId = 3
                         },
                         new
                         {
                             Id = 3,
-                            ExtraPrice = 150m,
-                            Name = "Admin dashboard",
-                            ServiceId = 1
+                            ExtraPrice = 200m,
+                            Name = "Chatting",
+                            ServiceId = 4
                         },
                         new
                         {
                             Id = 4,
-                            ExtraPrice = 100m,
-                            Name = "Push notifications",
-                            ServiceId = 2
+                            ExtraPrice = 200m,
+                            Name = "Chatting",
+                            ServiceId = 5
                         },
                         new
                         {
                             Id = 5,
                             ExtraPrice = 200m,
-                            Name = "In-app purchases",
-                            ServiceId = 2
+                            Name = "Chatting",
+                            ServiceId = 6
                         },
                         new
                         {
                             Id = 6,
                             ExtraPrice = 150m,
+                            Name = "Search Engine Optimization",
+                            ServiceId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ExtraPrice = 150m,
+                            Name = "Search Engine Optimization",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ExtraPrice = 150m,
+                            Name = "Search Engine Optimization",
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ExtraPrice = 150m,
+                            Name = "Search Engine Optimization",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ExtraPrice = 500m,
+                            Name = "Recommendations Engine",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ExtraPrice = 500m,
+                            Name = "Recommendations Engine",
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ExtraPrice = 500m,
+                            Name = "Recommendations Engine",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ExtraPrice = 500m,
+                            Name = "Recommendations Engine",
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ExtraPrice = 500m,
+                            Name = "Recommendations Engine",
+                            ServiceId = 6
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ExtraPrice = 200m,
+                            Name = "Push Notifications",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ExtraPrice = 200m,
+                            Name = "Push Notifications",
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ExtraPrice = 200m,
+                            Name = "Push Notifications",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ExtraPrice = 400m,
+                            Name = "Push Notifications",
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ExtraPrice = 500m,
+                            Name = "Push Notifications",
+                            ServiceId = 6
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ExtraPrice = 1000m,
+                            Name = "In-app purchases",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ExtraPrice = 1000m,
+                            Name = "In-app purchases",
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ExtraPrice = 1000m,
+                            Name = "In-app purchases",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ExtraPrice = 1000m,
+                            Name = "In-app purchases",
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ExtraPrice = 1000m,
+                            Name = "In-app purchases",
+                            ServiceId = 6
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ExtraPrice = 300m,
+                            Name = "Admin dashboard",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ExtraPrice = 300m,
                             Name = "Admin dashboard",
                             ServiceId = 3
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 27,
                             ExtraPrice = 300m,
-                            Name = "E-commerce functionality",
+                            Name = "Admin dashboard",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ExtraPrice = 300m,
+                            Name = "Admin dashboard",
+                            ServiceId = 6
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ExtraPrice = 200m,
+                            Name = "CMS Content Management",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 30,
+                            ExtraPrice = 200m,
+                            Name = "CMS Content Management",
                             ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 31,
+                            ExtraPrice = 200m,
+                            Name = "CMS Content Management",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 32,
+                            ExtraPrice = 700m,
+                            Name = "AI Integration",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 33,
+                            ExtraPrice = 700m,
+                            Name = "AI Integration",
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 34,
+                            ExtraPrice = 700m,
+                            Name = "AI Integration",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 35,
+                            ExtraPrice = 700m,
+                            Name = "AI Integration",
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            Id = 36,
+                            ExtraPrice = 700m,
+                            Name = "AI Integration",
+                            ServiceId = 6
+                        },
+                        new
+                        {
+                            Id = 37,
+                            ExtraPrice = 200m,
+                            Name = "Calculation",
+                            ServiceId = 2
+                        },
+                        new
+                        {
+                            Id = 38,
+                            ExtraPrice = 200m,
+                            Name = "Calculation",
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            Id = 39,
+                            ExtraPrice = 200m,
+                            Name = "Calculation",
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            Id = 40,
+                            ExtraPrice = 200m,
+                            Name = "Calculation",
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            Id = 41,
+                            ExtraPrice = 200m,
+                            Name = "Calculation",
+                            ServiceId = 6
                         });
                 });
 
@@ -235,40 +472,40 @@ namespace SmartSammour.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CustomerEmail")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("CustomerPhone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("EstimatedPrice")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("PlanId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ProjectDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("ServiceId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Status")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -282,10 +519,10 @@ namespace SmartSammour.Infrastructure.Migrations
             modelBuilder.Entity("SmartSammour.Core.Entities.InquiryAddOn", b =>
                 {
                     b.Property<int>("InquiryId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("AddOnId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("InquiryId", "AddOnId");
 
@@ -298,32 +535,35 @@ namespace SmartSammour.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("ExtraFee")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<bool>("IncludeDomainAnalysis")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("IncludeDomainRegistration")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("IncludeHosting")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("StartFrom")
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
@@ -339,7 +579,8 @@ namespace SmartSammour.Infrastructure.Migrations
                             IncludeDomainRegistration = false,
                             IncludeHosting = false,
                             IsActive = true,
-                            Name = "Basic"
+                            Name = "Basic",
+                            StartFrom = 50m
                         },
                         new
                         {
@@ -350,7 +591,8 @@ namespace SmartSammour.Infrastructure.Migrations
                             IncludeDomainRegistration = true,
                             IncludeHosting = true,
                             IsActive = true,
-                            Name = "Professional"
+                            Name = "Professional",
+                            StartFrom = 400m
                         },
                         new
                         {
@@ -361,17 +603,18 @@ namespace SmartSammour.Infrastructure.Migrations
                             IncludeDomainRegistration = true,
                             IncludeHosting = true,
                             IsActive = true,
-                            Name = "Inclusive"
+                            Name = "Inclusive",
+                            StartFrom = 2500m
                         });
                 });
 
             modelBuilder.Entity("SmartSammour.Core.Entities.PlanService", b =>
                 {
                     b.Property<int>("PlanId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<int>("ServiceId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.HasKey("PlanId", "ServiceId");
 
@@ -392,6 +635,21 @@ namespace SmartSammour.Infrastructure.Migrations
                         },
                         new
                         {
+                            PlanId = 1,
+                            ServiceId = 3
+                        },
+                        new
+                        {
+                            PlanId = 1,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            PlanId = 1,
+                            ServiceId = 5
+                        },
+                        new
+                        {
                             PlanId = 2,
                             ServiceId = 1
                         },
@@ -407,8 +665,23 @@ namespace SmartSammour.Infrastructure.Migrations
                         },
                         new
                         {
+                            PlanId = 2,
+                            ServiceId = 4
+                        },
+                        new
+                        {
+                            PlanId = 2,
+                            ServiceId = 5
+                        },
+                        new
+                        {
+                            PlanId = 2,
+                            ServiceId = 6
+                        },
+                        new
+                        {
                             PlanId = 3,
-                            ServiceId = 3
+                            ServiceId = 6
                         });
                 });
 
@@ -416,20 +689,20 @@ namespace SmartSammour.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -439,81 +712,109 @@ namespace SmartSammour.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BasePrice = 300m,
+                            BasePrice = 50m,
                             Description = "Custom website, built to spec",
                             Name = "Website"
                         },
                         new
                         {
                             Id = 2,
-                            BasePrice = 500m,
+                            BasePrice = 1000m,
+                            Description = "interactive web application",
+                            Name = "E-commerce Web Application"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BasePrice = 1000m,
+                            Description = "interactive web application",
+                            Name = "Social Media Web Application"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BasePrice = 1000m,
+                            Description = "interactive web application",
+                            Name = "Booking system Web Application"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BasePrice = 1200m,
                             Description = "Cross-platform mobile app (iOS + Android)",
                             Name = "Mobile App"
                         },
                         new
                         {
-                            Id = 3,
-                            BasePrice = 700m,
+                            Id = 6,
+                            BasePrice = 2500m,
                             Description = "Integrated website, mobile application, and backend/API solution",
                             Name = "Full Software Solution"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BasePrice = 0m,
+                            Description = "We are listing to your needs, this type have no predefined price, we will contact you for more details",
+                            Name = "Other"
                         });
                 });
 
             modelBuilder.Entity("SmartSammour.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -522,8 +823,7 @@ namespace SmartSammour.Infrastructure.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });

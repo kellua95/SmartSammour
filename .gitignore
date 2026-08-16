@@ -35,3 +35,7 @@
 # =========================
 .DS_Store
 Thumbs.db
+
+SmartSammour.API/publish/
+SmartSammour.API/Properties/PublishProfiles/
+SmartSammour.API/production-update.sql
