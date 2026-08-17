@@ -12,6 +12,8 @@ namespace SmartSammour.Application.DTOs
 
         public string Description { get; set; } = string.Empty;
 
+        public decimal StartFrom { get; set; }
+
         public decimal ExtraFee { get; set; }
 
         public bool IncludesDomainAnalysis { get; set; }

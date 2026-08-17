@@ -26,6 +26,7 @@ namespace SmartSammour.API.Controllers
                 Name = p.Name,
                 Description = p.Description,
                 ExtraFee = p.ExtraFee,
+                StartFrom = p.StartFrom,
                 IncludesDomainAnalysis = p.IncludeDomainAnalysis,
                 IncludesHosting = p.IncludeHosting,
                 IncludesDomainRegistration = p.IncludeDomainRegistration,
