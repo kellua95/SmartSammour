@@ -1,0 +1,7 @@
+[[build.env]]
+name = "GOOGLE_BUILDABLE"
+value = "SmartSammour.API/SmartSammour.API.csproj"
+
+[[build.env]]
+name = "GOOGLE_RUNTIME_VERSION"
+value = "10.0.302"
