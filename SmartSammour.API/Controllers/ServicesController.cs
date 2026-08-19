@@ -20,14 +20,14 @@ namespace SmartSammour.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             var services = await _serviceRepository.GetAllAsync();
-            return Ok(services.Select(ToDto));
+            return Ok(services.Where(s => s.IsActive).Select(ToDto));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var service = await _serviceRepository.GetByIdAsync(id);
-            if (service == null) { return NotFound(); }
+            if (service == null || !service.IsActive) { return NotFound(); }
             return Ok(ToDto(service));
         }
 
@@ -37,12 +37,14 @@ namespace SmartSammour.API.Controllers
             Name = service.Name,
             Description = service.Description,
             BasePrice = service.BasePrice,
-            AddOns = service.AddOns.Select(a => new AddOnDto
-            {
-                Id = a.Id,
-                Name = a.Name,
-                ExtraPrice = a.ExtraPrice
-            }).ToList()
+            AddOns = service.AddOns
+                .Where(a => a.IsActive)
+                .Select(a => new AddOnDto
+                {
+                    Id = a.Id,
+                    Name = a.Name,
+                    ExtraPrice = a.ExtraPrice
+                }).ToList()
         };
     }
 }

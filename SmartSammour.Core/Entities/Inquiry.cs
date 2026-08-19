@@ -1,7 +1,15 @@
 ﻿namespace SmartSammour.Core.Entities
 {
-
-    public enum inquiryStatus { New, Contacted, Quoted, Closed }
+    public enum InquiryStatus
+    {
+        New,
+        Contacted,
+        Quoted,
+        Accepted,
+        Rejected,
+        InProgress,
+        Completed
+    }
     public class Inquiry
     {
         public int Id { get; set; }
@@ -20,14 +28,19 @@
         public ICollection<InquiryAddOn> SelectedAddOns { get; set; } = new List<InquiryAddOn>();
 
         public decimal EstimatedPrice { get; set; }
-        public inquiryStatus Status { get; set; } = inquiryStatus.New;
+        public InquiryStatus Status { get; set; } = InquiryStatus.New;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; }
+        public bool IsActive { get; set; } = true;
+
+        public string? AdminNotes {  get; set; }
     }
 
     public class InquiryAddOn
     {
         public int InquiryId { get; set; }
         public Inquiry Inquiry { get; set; } = null!;
+
         public int AddOnId { get; set; }
         public AddOn AddOn { get; set; } = null!;
     }

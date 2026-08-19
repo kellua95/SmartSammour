@@ -7,6 +7,8 @@
         public decimal ExtraPrice { get; set; }
 
         public int ServiceId { get; set; }
+        public bool IsActive { get; set; } = true;
+
         public Service Service { get; set; } = null!;
     }
 }

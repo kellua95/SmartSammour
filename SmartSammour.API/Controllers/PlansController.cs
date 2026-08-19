@@ -30,7 +30,7 @@ namespace SmartSammour.API.Controllers
                 IncludesDomainAnalysis = p.IncludeDomainAnalysis,
                 IncludesHosting = p.IncludeHosting,
                 IncludesDomainRegistration = p.IncludeDomainRegistration,
-            }).ToList();
+            }).OrderBy(p => p.StartFrom).ToList();
 
             return Ok(result);
         }
