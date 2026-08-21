@@ -48,7 +48,9 @@ namespace SmartSammour.API.Controllers
             
             var services = await _planRepository.GetServicesByPlanIdAsync(planId);
 
-            var result = services.Select(s => new ServiceDto
+            var result = services
+                .Where(s => s.IsActive)
+                .Select(s => new ServiceDto
             {
                 Id = s.Id,
                 Name = s.Name,
