@@ -9,7 +9,7 @@ namespace SmartSammour.API.Controllers.Admin
 {
     [ApiController]
     [Route("api/admin/plans")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class AdminPlansController : ControllerBase
     {
         private readonly AppDbContext _context;

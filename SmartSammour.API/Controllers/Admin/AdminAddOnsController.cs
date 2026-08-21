@@ -9,7 +9,7 @@ namespace SmartSammour.API.Controllers.Admin
 {
     [ApiController]
     [Route("api/admin/addons")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class AdminAddOnsController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -124,9 +124,7 @@ namespace SmartSammour.API.Controllers.Admin
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(
-            int id,
-            UpdateAddOnDto dto)
+        public async Task<IActionResult> Update(int id, UpdateAddOnDto dto)
         {
             var addOn = await _context.AddOns
                 .FirstOrDefaultAsync(a => a.Id == id);
@@ -170,9 +168,7 @@ namespace SmartSammour.API.Controllers.Admin
         }
 
         [HttpPatch("{id:int}/active")]
-        public async Task<IActionResult> SetActive(
-            int id,
-            [FromQuery] bool active)
+        public async Task<IActionResult> SetActive(int id, [FromQuery] bool active)
         {
             var addOn = await _context.AddOns
                 .FirstOrDefaultAsync(a => a.Id == id);
