@@ -21,7 +21,9 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:5173",
             "https://cheerful-alpaca-f6b4d7.netlify.app",
             "https://smartsammour.com",
-            "https://www.smartsammour.com") // adjust to whatever you actually run
+            "https://www.smartsammour.com",
+            "https://smartsammour.web.app",
+            "https://smartsammour.firebaseapp.com") // adjust to whatever you actually run
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
