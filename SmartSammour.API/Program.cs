@@ -132,29 +132,19 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var roleManager = scope.ServiceProvider
+        .GetRequiredService<RoleManager<IdentityRole>>();
 
-    if (!await roleManager.RoleExistsAsync("Admin"))
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    string[] roles = { "Admin", "SuperAdmin" };
 
-    var adminEmail = "info@smartsammour.com";
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser is null)
+    foreach (var role in roles)
     {
-        adminUser = new ApplicationUser { UserName = adminEmail, Email = adminEmail, FullName = "Abed Al-Hmeed Sammour", EmailConfirmed = true };
-        var createResult = await userManager.CreateAsync(adminUser, "ChangeThisPassword123!");
-
-        if (!createResult.Succeeded)
+        if (!await roleManager.RoleExistsAsync(role))
         {
-            foreach (var err in createResult.Errors)
-                Console.WriteLine($"[SEED ERROR] {err.Code}: {err.Description}");
-        }
-        else
-        {
-            await userManager.AddToRoleAsync(adminUser, "Admin");
+            await roleManager.CreateAsync(
+                new IdentityRole(role)
+            );
         }
     }
 }
-
 app.Run();
